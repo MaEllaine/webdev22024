@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+    //Task 1: Define a function that will determine if an element is odd or even number, then it will reject if the value is Even, and resolve, if the value is Oodd
+
+    //Define a list of numbers
+    let listOfNumbers = [1,2,3,4,5,6,7,8,9,10];
+
+    //Create the isOdd Function
+    function isOdd(number) {
+        return new Promise((resolve, reject)=> {
+            if (number % 2 == 0) {
+                console.log("Rejected Even", number);
+            }
+            else {
+                console.log("Resolved Odd", number);
+            }
+        });
+    } 
+
+    //Use a for loop to iterate each of the elements
+    function Iteration(list) {
+        for (let i = 0; i < list.length; i++) {
+            isOdd(list[i]);
+        }
+    }
+    
+    //Don't forget to call out the Function
+    Iteration(listOfNumbers);
+
+    //Task 2: Define a function that will randomly resolve a random Character from A - Z with a delay of 500ms
+
+    //Create the function:
+    function getRandomCharacter(){
+        return new Promise((resolve, reject)=> {
+            //use the built-in funtion "setTimeout()"
+            setTimeout(()=>{
+                //Define a variable that has a set from A-Z
+                let list = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                //Using built in Math functions, create a varaible that will store a random value based on the prior variable's lenght
+                let randomPick = Math.floor(Math.random() * list.length);
+                //Use the resolve function to call the return value
+                resolve(list[randomPick]);
+            }, 500);
+        });
+    }
+
+    //Calling out the function requires then catch method in javascript
+    //Struture of the Then Catch is: Function_Name().then().catch();
+
+    //Using this given then catch, you will be able to print the resolved value from the invoked funcition
+    getRandomCharacter()
+    //Then is for the succession of the function
+    .then(character => {
+      console.log("Resolved character:", character);
+    })
+    //catch is for the failure of the function
+    .catch(error => {
+      console.log("Rejected Character:", error);
+    });
+
+    //In the next function, since we'll use reject as an output, it will lead to the failure of the function, that's why we included the catch early on to compare outputs
+
+    //Function 3: Selecting a random number from 1-200
+    function getData() {
+        return new Promise((resolve, reject)=> {
+            setTimeout(()=> {
+                //Using the same format of selecting a random element, we'll just change the other parameter of Math.floor()
+                let random = Math.floor(Math.random() * 200);
+                //The code above shows it will select a random number from 0 - 200 and it will store into the varaible named: random
+                reject(random);
+            }, 500);
+        });
+    }
+
+    //Using the same format from the last function, we will use then catch method, but this time, the output expected is a fail, so it will go down to the catch, and it will print "Rejected Value"
+    getData()
+    .then(character => {
+      console.log("Resolved Value:", character);
+    }).catch(error => {
+      console.log("Rejected Value:", error);
+    });
+
+
+    //Function 4: Using a loop, calling out setTimeout twice, to reject and resolve
+
+    //the expected output will show the reject first and then the resolve, and using the variable i, we can determine which output will be printed
+
+    //if i = 0 , since it is the start of every loop and in incremental format, we will declare i=0 then Reject, since the expected output is to show reject first
+
+    //then i=1 , since a loop has finished, it will add a value of 1 to i, because it is inremental, then i=1 is a resolved output
+    function rejectResolve() {
+        return new Promise((reject, resolve)=> {
+            setTimeout(()=> {
+                for (let i = 0; i < 2; i++){
+                if (i === 1){
+                    console.log("Resolve Function 4");
+                } else {
+                    console.log("Reject Function 4");
+                }
+            }
+            }, 500);
+            
+        });
+    }
+
+    rejectResolve();
+
+
+    //Reminder: Please do not forget to call out functions like I did - Migs 
+
+
+
+    </script>
+</body>
+</html>
